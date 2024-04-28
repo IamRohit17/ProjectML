@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+  <!-- <link href="https://fonts.googleapis.com/css?family=AR One Sans" rel="stylesheet" type="text/css">  -->
+  <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+
+  
+</head>
+<body>
+    <nav>
+        <div class="sub1">
+            <paintext>iMo Player</paintext>      
+        </div>
+        <div class="links-login">
+          <div class="links">
+            <a href="#" class="link1">Home</a>
+            <a href="#" class="link1">About Us</a>
+            <a href="#" class="link1">Contact Us</a>
+            <a href="#" class="link1">Detect</a>
+          </div>
+          <div class="login-section">
+            <i class="fa fa-solid fa-user" style="color: #ffffff;"></i>
+            <a id="login-btn" href="/login">Login</a>
+          </div>
+        </div>
+    </nav>
+    <main>
+
+      <div class="heading">
+        <p class="heading-txt">Emotion based Music Recommendation</p>
+        <p class="msg">Let your emotions tells your music story, Discover Music through Expressions!</p>
+      </div>
+
+      <div class="main-contents">
+        <div class="contents">
+          <div class="content1">
+            <div class="camera-section">
+              <div class="edge edge1"></div>
+              <div class="edge edge2"></div>
+              <div class="edge edge3"></div>
+              <div class="edge edge4"></div>
+              <img id="camera_feed" class="cam" src="../static/img/im5.jpg"/>
+            </div>
+            <button class="start-camera">Start Detecting</button>
+            <button class="stop-camera">Stop Detecting</button>
+          </div>
+
+          <div class="song-list" style="display: none;">
+            
+          </div>
+        </div>
+        
+      </div>
+      <div class="contact-sec">
+        <p>CONTACT US</p>
+        <div class="contact-map">
+            <form action="#" class="contact-form">
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="number" placeholder="Phone Number">
+                <textarea placeholder="Your Message"></textarea>
+                <button class="send-btn">Send</button>
+            </form>
+            <div class="map-loc">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d48291.5788497836!2d-74.36619868046876!3d40.845012643996085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1710268934842!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+        </div>
+      </div>
+
+    </main>
+    <script>
+      const startCam = document.querySelector('.start-camera');
+      const stopCam = document.querySelector('.stop-camera');
+      const video = document.getElementById('camera_feed');
+
+      let cameraRunning = false;
+
+      startCam.addEventListener('click', toggleCamera);
+      stopCam.addEventListener('click', toggleCamera);
+
+      function toggleCamera() {
+        if (cameraRunning) {
+          stopCamera();
+        } else {
+          startCamera();
+        }
+      }
+
+      function startCamera() {
+        cameraRunning = true;
+        startCam.style.display = 'none';
+        stopCam.style.display = 'block';
+        video.src = `{{ url_for('video_feed') }}`;
+
+        const songList = document.querySelector('.song-list');
+        songList.style.display = 'block';
+      }
+
+      function stopCamera() {
+        cameraRunning = false;
+        stopCam.style.display = 'none';
+        startCam.style.display = 'block';
+        video.src = "../static/img/im5.jpg";
+        fetch('/stop_camera', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error stopping camera:', error));
+        const songList = document.querySelector('.song-list');
+        songList.style.display = 'none';
+      }
+    </script>
+    <script src="{{ url_for('static', filename='js/displaySong.js') }}"></script>
+
+</body>
+</html>
+
+<!-- 
+projectSample
+      |
+      |______ Static
+      |        |
+      |        |____music
+      |        |      |
+      |        |      |_____fall.mp3
+      |        |      |_____as.mp3
+      |        |      |_____ney.mp3
+      |        |      |_____yo.mp3
+      |        |      |_____less.mp3
+      |        |
+      |        |_____style1.css
+      |
+      |_______ templates
+      |            |______index.html
+      |
+      |_______ app.py
+      |_______ InsrtCsvToMySql.py
+      |_______ sendData.py 
+      |_______ music_data.csv --> 

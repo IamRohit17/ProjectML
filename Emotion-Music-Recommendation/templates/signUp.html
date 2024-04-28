@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/signUp.css">
+  <title>Sign Up Form</title>
+</head>
+<body>
+  <div class="wrapper-box">
+    <div class="edge edge1"></div>
+    <div class="edge edge2"></div>
+    <div class="edge edge3"></div>
+    <div class="edge edge4"></div>
+    <form action="" class="form-wrapper" onsubmit="getFormData(event)">
+      <p style="text-align: center;">Signup Form</p>
+      <div class="input-group">
+        <div class="input-field">
+          <input class="inp-name" type="text" name="Name" required>
+          <span>Full Name</span>
+        </div>
+        <div class="input-field">
+          <input class="inp-uname" type="text" name="Uname" required>
+          <span>User Name</span>
+        </div>
+        <div class="input-field">
+          <input class="inp-email" type="email" name="Email" required>
+          <span>Email</span>
+        </div>
+        <div class="input-field">
+          <input class="inp-pass" type="password" name="Password" required>
+          <span>Password</span>
+        </div>
+        <div class="input-field">
+          <input type="password" name="confirmPassword" required>
+          <span>Confirm Password</span>
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,82 @@
+@mixin flex($dir, $align, $justify) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin border($dir) {
+  border-#{$dir}: none;
+}
+
+@mixin uni-style {
+  html {
+    font-size: 62.5%;
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Saira', sans-serif;
+  }
+}
+
+@mixin edge-frame {
+  .edge {
+    height: 10rem;
+    width: 10rem;
+    border: 0.2rem solid rgb(0, 255, 166);
+    border-radius: .1rem;
+    position: absolute;
+    animation: show-border 1s linear .5s both alternate;
+    z-index: 2;
+
+    &.edge1 {
+      @include border(bottom);
+      @include border(right);
+      top: 0;
+      left: 0;
+    }
+
+    &.edge2 {
+      @include border(top);
+      @include border(right);
+      bottom: 0;
+      left: 0;
+    }
+
+    &.edge3 {
+      @include border(top);
+      @include border(left);
+      bottom: 0;
+      right: 0;
+    }
+
+    &.edge4 {
+      @include border(bottom);
+      @include border(left);
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+@mixin border-anim($sv1, $sv2, $sv3) {
+  @keyframes show-border {
+    0% {
+      transform: scale($sv1);
+      opacity: 0;
+    }
+
+    60% {
+      transform: scale($sv2);
+      opacity: 1.5;
+    }
+
+    100% {
+      transform: scale($sv3);
+      opacity: 1;
+    }
+  }
+}
